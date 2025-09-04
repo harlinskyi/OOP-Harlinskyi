@@ -1,39 +1,42 @@
-﻿using lab2;
-
-internal class Program
+﻿namespace lab2
 {
-    private static void Main()
+    public static class Program
     {
-        try
+        public static void Main()
         {
-            var acc = new BankAccount("UA1234567890", "Harlinskyi Kyrylo", initialBalance: 500m, initialCapacity: 4);
-            Console.WriteLine("Після створення:   " + acc);
+            var studentsList = new List<Student>([
+                new Student(1, "Кирило", "Гарлінський", 3, 84.5),
+                new Student(2, "Олексій", "Купець", 3, 91.2),
+                new Student(3, "Руслан", "Орешко", 3, 76.0),
+                new Student(4, "Іван", "Денисевич", 3, 88.3)
+            ]);
 
-            Console.WriteLine("Поточний баланс (get): " + acc.Balance);
 
-            acc.Deposit(200m);
-            Console.WriteLine("Після Deposit(200):    " + acc);
+            var group = new StudentGroup("КН-3/1", 3);
 
-            acc.Withdraw(50m);
-            Console.WriteLine("Після Withdraw(50):    " + acc);
+            studentsList.ForEach(s => group.Add(s));
 
-            acc.Deposit(300m);
-            Console.WriteLine("Після оператора '+300': " + acc);
+            Console.WriteLine("Список студентів групи " + group);
 
-            acc.Withdraw(100m);
-            Console.WriteLine("Після оператора '-100': " + acc);
+            // Show all students
+            for (int i = 0; i < group.Count; i++)
+                Console.WriteLine($"  #{i}: {group[i]}");
 
-            Console.WriteLine("\nІсторія транзакцій:");
-            for (int i = 0; i < acc.TransactionCount; i++)
+            var found = group["Кирило Гарлінський"];
+            Console.WriteLine("Знайдено за ПІБ: " + (found != null ? found.ToString() : "немає"));
+
+            // search student by Name or Surname
+            var name = "Кирило Гарлінський";
+            found = group[name];
+            Console.WriteLine("Пошук за ім'ям або прізвищем для видалення: " + (found != null ? found.ToString() : "не знайдено"));
+            if (found != null)
             {
-                var op = acc[i];
-                var kind = op >= 0 ? "Депозит" : "Зняття";
-                Console.WriteLine($"[{i}] {kind}: {op:F2} грн");
+                group.Remove(found);
+                Console.WriteLine("Після видалення: " + group);
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
+
+            Console.WriteLine("Поточний список студентів " + group);
+
         }
     }
 }
