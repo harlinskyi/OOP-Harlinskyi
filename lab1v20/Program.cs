@@ -1,4 +1,4 @@
-﻿namespace OOP_HARLINSKYI.lab1
+﻿namespace lab1v20
 {
     public abstract class Figure
     {
