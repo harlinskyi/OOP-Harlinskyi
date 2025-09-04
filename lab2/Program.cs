@@ -1,4 +1,4 @@
-﻿namespace lab2
+﻿namespace lab2v7
 {
     public static class Program
     {
