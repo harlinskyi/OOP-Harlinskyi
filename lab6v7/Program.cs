@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lab6_Var7
+namespace Lab6v7
 {
     // Клас для зберігання температурних записів
     public class TemperatureRecord
